@@ -1,0 +1,31 @@
+#start a dev consul server
+docker run -d --name consul -p 8500:8500 gliderlabs/consul-server -bootstrap
+curl localhost:8500
+
+# visit http://localhost:8500/ui
+# or use API
+# GET http://localhost:8500/v1/catalog/services
+
+# to register a service
+# POST to http://localhost:8500/v1/catalog/register
+{
+  "Node": "apps",
+  "Address": "172.17.0.2",
+  "Service": {
+    "ID": "web1",
+    "Service": "web",
+    "Tags": [
+      "master",
+      "v1"
+    ],
+    "Address": "172.17.0.3",
+    "Port": 80
+  }
+}
+
+# to deregister a service
+# POST to http://localhost:8500/v1/catalog/deregister
+{
+  "Node": "apps",
+  "ServiceID": "web1"
+}

@@ -1,0 +1,25 @@
+# start a dev etcd server
+docker run -d --name etcd -p 2379:2379 elcolio/etcd
+
+# visit http://localhost:2379/v2/keys
+
+# to register/update a service
+# PUT to http://localhost:2379/v2/keys/<some-key>
+# body with Content-Type: application/x-www-form-urlencoded
+value="some-value"
+
+# to retrieve a service
+# GET to http://localhost:2379/v2/keys/<some-key>
+# optional ?recursive=true
+
+# to deregister a service
+# DELETE to http://localhost:2379/v2/keys/<some-key>
+# optional ?recursive=true
+
+# optionally use the command line with etcdctl
+docker exec -it etcd /bin/sh
+etcdctl set web/upstream/1 192.168.1.1
+etcdctl set web/upstream/2 192.168.1.2
+etcdctl get web/upstream/1
+etcdctl ls web/
+etcdctl ls web/ --recursive
