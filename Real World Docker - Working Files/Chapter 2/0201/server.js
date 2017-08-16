@@ -2,7 +2,7 @@ var express = require("express");
 
 express()
  .get("*", function(req, res) {
-    res.send("Hello There");
+    res.send("Hello There! this is node js with docker - vynu");
  })
  .listen(3000, function(err) {
     if (err) {
