@@ -1,9 +1,9 @@
 #!/bin/bash
-docker build -t willrstern/test-db-migrations .
-docker push willrstern/test-db-migrations
+docker build -t vynu/test-db-migrations .
+docker push vynu/test-db-migrations
 
-ssh deploy@159.203.127.59 << EOF
-docker pull willrstern/test-db-migrations
-docker run --net web --rm willrstern/test-db-migrations
-docker rmi willrstern/sample-node
+ssh deploy@docker.digocn << EOF
+docker pull vynu/test-db-migrations
+docker run --net app --rm vynu/test-db-migrations
+docker rmi vynu/sample-node
 EOF
